@@ -38,7 +38,7 @@ class NoteServices {
         const query = {
             text: 'SELECT * FROM notes WHERE id = $1',
             values: [noteId]
-        }
+        };
 
         const result = await this._poll.query(query);
 
@@ -46,43 +46,39 @@ class NoteServices {
 
             throw new Error('Note tidak ditemukan')
 
-        }
+        };
 
         return result.rows[0];
 
     }
 
+    async editNoteById(noteId, {title, body}) {
 
-    // async updateNoteByID(noteID, {title, body}) {
+        const updatedAt = new Date().toISOString();
+        const query = {
+           text: 'UPDATE notes SET title=$1, body=$2, updated_at=$3 WHERE id = $4 RETURNING id',
+           values: [title, body, updatedAt, noteId]
+        };
 
-    //     const updatedAt = new Date().toLocaleString("id-ID");
+        const result = await this._poll.query(query);
 
-    //     const query = {
-    //         text: 'UPDATE notes SET title=$1, body=$2, updated_at=$3 WHERE id = $4 RETURNING id',
-    //         values: [title, body, updatedAt, noteID]
-    //     }
+        if (!result.rowCount) {
+            throw new Error(`Note tidak dapat diubah, Id tidak ditemukan`)
+        };
+    }
+   
+    async deleteNoteById(noteId) {
+        const query = {
+            text: 'DELETE FROM notes WHERE id = $1',
+            values: [noteId]
+        };
 
-    //     const result = await this._poll.query(query);
-
-    //     if (!result.rowCount) {
-    //         throw new Error(`Note tidak dapat diubah, ${noteID} tidak ditemukan`)
-    //     }
-
-        
-    // }
-
-
-    // async deleteNoteByID(noteID) {
-        
-    //     const result = await this._poll.query('DELETE FROM notes WHERE id=$1 RETURNING title', [noteID])
+        const result = await this._poll.query(query);
             
-    //     if(!result.rowCount) {
-    //         throw new Error('delete note failure')
-    //     }
-
-    //     return result
-            
-    // }
+        if(!result.rowCount) {
+            throw new Error('Note gagal dihapus, Id tidak ditemukan');
+        };        
+    }
 
 
 }

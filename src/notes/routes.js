@@ -20,5 +20,18 @@ route.get('/notes/:id', async (req, res) => {
     res.json(getNoteById);
 });
 
+route.put('/notes/:noteId', async (req, res) => {
+    const noteId = req.params.id;
+    const {title, body} = req.body;
+    const editNote = await new NoteServices().editNoteById(noteId, {title, body});
+    res.json(editNote);
+});
+
+route.delete('/notes/:Id', async (req, res) => {
+    const noteId = req.params.Id;
+    const deleteNote = await new NoteServices().deleteNoteById(noteId);
+    res.json(deleteNote);
+});
+
 module.exports = route;
 
