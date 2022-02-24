@@ -1,22 +1,24 @@
 {
-  "name": "nodejs_pramagang",
+  "name": "notes-api-starter",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js",
-    "migrate": "node-pg-migrate"
+    "migrate": "node-pg-migrate",
+    "dev": "nodemon ./server.js"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "nodemon": "^2.0.15"
-  },
   "dependencies": {
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
+    "nanoid": "^3.3.1",
     "node-pg-migrate": "^6.2.1",
     "pg": "^8.7.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
