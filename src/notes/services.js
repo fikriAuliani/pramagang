@@ -21,7 +21,7 @@ class NoteServices {
         const result = await this._poll.query(query);
 
         if (!result.rows[0].id) {
-            throw new Error('Notes gagal ditambahkan');
+            throw new Error('Notes gagal ditambahkan');                 //error message
         }
 
         return result.rows[0];
@@ -44,7 +44,7 @@ class NoteServices {
 
         if (!result.rows.length) {
 
-            throw new Error('Note tidak ditemukan')
+            throw new Error('Note tidak ditemukan')                             //error message
 
         };
 
@@ -63,7 +63,7 @@ class NoteServices {
         const result = await this._poll.query(query);
 
         if (!result.rowCount) {
-            throw new Error(`Note tidak dapat diubah, Id tidak ditemukan`)
+            throw new Error(`Note tidak dapat diubah, Id tidak ditemukan`)          //error message
         };
     }
    
@@ -76,7 +76,7 @@ class NoteServices {
         const result = await this._poll.query(query);
             
         if(!result.rowCount) {
-            throw new Error('Note gagal dihapus, Id tidak ditemukan');
+            throw new Error('Note gagal dihapus, Id tidak ditemukan');              //error message
         };        
     }
 
